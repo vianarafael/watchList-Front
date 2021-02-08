@@ -2,6 +2,20 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
+import style from 'styled-components';
+
+const Container = style.div`
+  heigth 100px;
+  width: 80px;
+  margin: 1rem;
+`
+
+const Poster =  style.img`
+heigth 100px;
+width: 80px;
+margin: 1rem;
+`
+
 const MySlider = ({movies}) => {
     const settings = {
         dots: true,
@@ -43,10 +57,11 @@ const MySlider = ({movies}) => {
         <h2> Multiple items </h2>
         <Slider {...settings}>
           {movies ? movies.map(movie => {
-              return (<div>
-                  <h3>{movie.title}</h3>
-                  <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
-              </div>)
+            console.log(movie)
+              return (<Container>
+                  <h3></h3>
+                  <Poster src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
+              </Container>)
           }) : "" }
          
         </Slider>
