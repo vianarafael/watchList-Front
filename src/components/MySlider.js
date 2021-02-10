@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import style from 'styled-components';
 
+
+// I have to break that problem down into manageable chunks
 const Container = style.div`
   heigth 100px;
   width: 80px;

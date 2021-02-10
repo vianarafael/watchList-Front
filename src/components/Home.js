@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import env from 'react-dotenv';
+import Carrousel from './Carrousel'
 
 import MySlider from './MySlider'
 
@@ -16,7 +17,12 @@ const Home = () => {
         }
         getMovies()
     }, [])
-    return <MySlider movies={upcoming} />
+    console.log(upcoming)
+    return <div>
+        {upcoming ? (<Carrousel       color={'red'}
+        title="Upcoming"
+        films={upcoming} />) : "loading"}
+    </div>
 };
 
 export default Home;
