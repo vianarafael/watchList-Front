@@ -30,11 +30,6 @@ const Home = () => {
         }
         getMovies()
     }, [])
-    console.log(popular)
-    console.log(topRated)
-
-    console.log(nowPlaying)
-
     return <div>
         <PageDefault>
         {popular ? (
