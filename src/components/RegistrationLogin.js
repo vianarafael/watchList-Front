@@ -3,6 +3,8 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
+import { useHistory } from 'react-router-dom';
+
 
 
   
@@ -43,31 +45,38 @@ function RegistrationLogin() {
     } else {
       setLoginStatus(true);
       localStorage.setItem("token", response.data.token);
+      userAuthenticated()
     }
   };
 
   const userAuthenticated = async () => {
+
     const response  = await axios.get("/isAuth", {
       headers: {
         "x-access-token": localStorage.token
       }
     });
-    // get the userId 
-    console.log(response);
+    if (response.statusText === "OK") {
+      history.push("/dashboard")
+    }
+    
 
   }
 
   useEffect( () => {
     const getResponse = async () => {
-      const response = await axios.get('/login');
-      console.log(response);
-    };
 
+    };
     getResponse();
   }, [])
 
+
+  const history = useHistory();
+
   return (
-    <div className="RegistrationLogin">
+    <>
+    {localStorage.token ? history.push("/dashboard"): (
+      <div className="RegistrationLogin">
       <Registration>
         <h1>Registration</h1>
         <label>Username</label>
@@ -90,8 +99,11 @@ function RegistrationLogin() {
         }} />
         <button onClick={login}>Login</button>
       </Registration>
-      {loginStatus ? <button onClick={userAuthenticated}>User Auth</button>: "Nope"}
     </div>
+    )
+  
+  }
+  </>
   );
 }
 
