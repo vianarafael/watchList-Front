@@ -43,7 +43,7 @@ const Home = () => {
                 films={topRated} />
                 ) : "loading"}
         {nowPlaying ? (
-            <Carrousel  color={"#FF0000 "}
+            <Carrousel  color={"#FF0000"}
                 title="Now Playing"
                 films={nowPlaying} />
                 ) : "loading"}
