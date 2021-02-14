@@ -30,30 +30,36 @@ const Home = () => {
         }
         getMovies()
     }, [])
-    return <div>
+    return ( 
         <PageDefault>
-        {popular ? (
-            <Carrousel  color={"#00c86f"}
-                title="Popular"
-                films={popular} />
-                ) : "loading"}
-        {topRated ? (
-            <Carrousel  color={"#9cd33b"}
-                title="Top Rated"
-                films={topRated} />
-                ) : "loading"}
-        {nowPlaying ? (
-            <Carrousel  color={"#FF0000"}
-                title="Now Playing"
-                films={nowPlaying} />
-                ) : "loading"}
-        {upcoming ? (
-            <Carrousel  color={"#FFA500"}
-                title="Upcoming"
-                films={upcoming} />
-                ) : "loading"}
-                </PageDefault>
-    </div>
+        {popular && topRated && nowPlaying && upcoming ? (
+
+        <>
+       
+        <Carrousel  color={"#00c86f"}
+            title="Popular"
+            films={popular} />
+        
+
+        <Carrousel  color={"#9cd33b"}
+            title="Top Rated"
+            films={topRated} />
+            
+    
+        <Carrousel  color={"#FF0000"}
+            title="Now Playing"
+            films={nowPlaying} />
+            
+    
+        <Carrousel  color={"#FFA500"}
+            title="Upcoming"
+            films={upcoming} />
+               
+                
+        </>
+        ) : <h1>LOADING</h1> }
+        </PageDefault>
+    )
 };
 
 export default Home;
