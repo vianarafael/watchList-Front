@@ -28,16 +28,15 @@ function VideoCard({
     }
   }
   const image = `https://image.tmdb.org/t/p/w200/${poster}`;
-
-  console.log(selectedContext)
   return (
     <>
       <p style={{ 'textAlign': 'center' }}>{genresString}</p>
       <VideoCardContainer
-        onClick={() => {
+        onClick={(e) => {
           // setSelectedMovie(id);
           // history.push('./details');
-          console.log('yo')
+          selectedContext.dispatch({type: 'set_selected_movie', payload: id });
+          console.log(selectedContext.state);
         }}
         
         url={image}
