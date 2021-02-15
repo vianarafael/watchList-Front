@@ -72,7 +72,6 @@ function RegistrationLogin() {
 
 
   const history = useHistory();
-
   return (
     <>
     {localStorage.token ? history.push("/dashboard"): (
