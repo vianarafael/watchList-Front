@@ -39,13 +39,13 @@ function RegistrationLogin() {
 
   const login = async () => {
     const response = await axios.post('/login', {username, password});
-    console.log(response.data);
     if (response.data.auth === false) {
       setLoginStatus(false);
     } else {
       setLoginStatus(true);
       localStorage.setItem("token", response.data.token);
-      userAuthenticated()
+      localStorage.setItem("uid", response.data.data.id);
+      userAuthenticated();
     }
   };
 
