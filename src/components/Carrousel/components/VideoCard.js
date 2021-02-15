@@ -1,5 +1,7 @@
-import React from 'react';
+import  { useContext } from 'react';
 import { VideoCardContainer } from './styles';
+
+import { SelectedMovieContext } from '../../../App'
 
 
 function VideoCard({
@@ -10,6 +12,10 @@ function VideoCard({
   history,
   genres,
 }) {
+
+
+  const selectedContext = useContext(SelectedMovieContext);
+
   let genresString = '';
 
   if (genres) {
@@ -21,26 +27,19 @@ function VideoCard({
       }
     }
   }
-  let time;
   const image = `https://image.tmdb.org/t/p/w200/${poster}`;
+
+  console.log(selectedContext)
   return (
     <>
-      <p style={{ 'text-align': 'center' }}>{genresString}</p>
+      <p style={{ 'textAlign': 'center' }}>{genresString}</p>
       <VideoCardContainer
-        // onMouseEnter={() => {
-        //   time = setTimeout(() => {
-        //     setSelectedMovie(id);
-
-        //     history.push('./details');
-        //   }, 4000);
-        // }}
-        // onMouseLeave={() => {
-        //   clearTimeout(time);
-        // }}
-        // onClick={() => {
-        //   setSelectedMovie(id);
-        //   history.push('./details');
-        // }}
+        onClick={() => {
+          // setSelectedMovie(id);
+          // history.push('./details');
+          console.log('yo')
+        }}
+        
         url={image}
         target="_blank"
         style={{ borderColor: categoryColor || 'red' }}

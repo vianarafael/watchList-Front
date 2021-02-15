@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import env from 'react-dotenv';
 import Carrousel from './Carrousel'
@@ -13,6 +13,19 @@ const Home = () => {
     const [nowPlaying, setNowPlaying] = useState([]);
     const [topRated, setTopRated] = useState([]);
     const [popular, setPopular] = useState([]);
+
+    const initialState = {selectedMovie: null};
+
+    const reducer = (state, action) => {
+        switch(action.type) {
+            case "set_selected_movie":
+                return {selectedMovie: action.payload};
+            default:
+                throw new Error();
+        }
+    }
+
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
         const getMovies = async() => {
