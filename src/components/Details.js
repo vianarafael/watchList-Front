@@ -18,7 +18,11 @@ const Details = () => {
 
     })
     const addToWatchList = async () => {
-        const response = await axios.post(`/addMovie/${id}`);
+        console.log('da token', localStorage.token)
+        const response = await axios.post(`/addMovie/${id}`, null,  { params: {
+            token: localStorage.token
+            }
+          });
         // if the user is logged - save that stuff to the database
         console.log(response.data);
     }
