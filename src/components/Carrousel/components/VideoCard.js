@@ -1,21 +1,21 @@
 import  { useContext } from 'react';
 import { VideoCardContainer } from './styles';
 
-import { SelectedMovieContext } from '../../../App'
+import { SelectedMovieContext } from '../../../App';
 
+import { useHistory } from 'react-router-dom';
 
 function VideoCard({
   videoTitle,
   categoryColor,
   poster,
   id,
-  history,
   genres,
 }) {
 
 
   const selectedContext = useContext(SelectedMovieContext);
-
+  const history = useHistory();
   let genresString = '';
 
   if (genres) {
@@ -36,7 +36,7 @@ function VideoCard({
           // setSelectedMovie(id);
           // history.push('./details');
           selectedContext.dispatch({type: 'set_selected_movie', payload: id });
-          console.log(selectedContext.state);
+          history.push('details');
         }}
         
         url={image}

@@ -3,7 +3,8 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import RegistrationLogin from './components/RegistrationLogin';
 import Dashboard from './components/Dashboard';
-import { useReducer, createContext } from 'react'
+import Details from './components/Details';
+import { useReducer, createContext } from 'react';
 
 export const SelectedMovieContext = createContext();
 
@@ -29,6 +30,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/log" component={RegistrationLogin} />
           <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/details" component={Details} />
         </Switch>
       </Router>
     </SelectedMovieContext.Provider>
