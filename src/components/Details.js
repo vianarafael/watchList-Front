@@ -1,16 +1,26 @@
-import  { useContext } from 'react';
+import  { useState, useEffect, useContext } from 'react';
 import { SelectedMovieContext } from '../App';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import env from 'react-dotenv';
 
 const Details = () => {
+    const [filmData, setFilmData] = useState(null)
     const history = useHistory();
     const selectedContext = useContext(SelectedMovieContext)
-    console.log(selectedContext.state.selectedMovie);
+    const id = selectedContext.state.selectedMovie;
+    useEffect(() => {
+        async function getMovieData () {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${env.KEY}&append_to_response=videos,credits`)
+            setFilmData(response.data);
+        }
+        getMovieData();
+    })
     return (
         <>
-            { selectedContext.state.selectedMovie ? (
-            <h1>Movies Details</h1>
-            ) : history.push('/')}
+            { id ? ( <>
+            {filmData ? (<p>{filmData.title}</p>) : 'loading'}
+            </>) : history.push('/')}
         </>
     )
 }

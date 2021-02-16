@@ -11,7 +11,6 @@ export const SelectedMovieContext = createContext();
 
 const initialState = {selectedMovie: null}
 const reducer = (state, action) => {
-  console.log('in here', state, action)
   switch(action.type) {
     case 'set_selected_movie':
       state.selectedMovie = action.payload;
