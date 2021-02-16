@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Dashboard = ({name}) => {
+  const [watchList, setWatchList] = useState([]);
     // I have the user id on localStorage
 
     // I will access the movies from the database using the user's id
@@ -17,7 +18,8 @@ const Dashboard = ({name}) => {
           // get the movie data from the DB
           const uid = localStorage.getItem("uid")
           const getMovies = await axios.get(`/movies/${uid}`)
-          console.log(getMovies);
+          // now I have the id of the movies - I need to turn this into something more useful
+          setWatchList(getMovies.data.rows);
         }
       }
 
