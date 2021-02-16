@@ -10,16 +10,25 @@ const Details = () => {
     const selectedContext = useContext(SelectedMovieContext)
     const id = selectedContext.state.selectedMovie;
     useEffect(() => {
-        async function getMovieData () {
+         const  getMovieData = async () => {
             const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${env.KEY}&append_to_response=videos,credits`)
             setFilmData(response.data);
         }
         getMovieData();
+
     })
+    const addToWatchList = async () => {
+        const response = await axios.post(`/addMovie/${id}`);
+        // if the user is logged - save that stuff to the database
+        console.log(response.data);
+    }
     return (
         <>
             { id ? ( <>
-            {filmData ? (<p>{filmData.title}</p>) : 'loading'}
+            {filmData ? (<>
+                    <p>{filmData.title}</p>
+                    <button onClick={addToWatchList}>Add to WatchList</button>
+                </>) : 'loading'}
             </>) : history.push('/')}
         </>
     )
