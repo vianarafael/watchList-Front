@@ -35,6 +35,7 @@ const Dashboard = ({name}) => {
       return watchList.map(film => (
         <>
           <p>{film.data.title}</p>
+          <img src={`https://image.tmdb.org/t/p/w500/${film.data.poster_path}`} />
         </>
       ))
     }
