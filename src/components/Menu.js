@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom";
 import { useState } from 'react';
+import axios from 'axios';
+import env from 'react-dotenv';
 
 const TopMenu = styled.nav`
   background: #000;
@@ -21,17 +23,25 @@ const SignButton = styled.button`
 
 const Menu = () => {
     const history = useHistory();
-    const [searchedMovie, setSearchedMovie] = useState(null)
+    const [query, setQuery] = useState(null)
+
+    const searchMovie = async () => {
+      const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${env.KEY}&language=en-US&query=${query}`);
+      // I need to make this display in the home if when the function is called
+      console.log(response.data.results);
+    }
     return (
         <TopMenu>
         <h1>Watch List</h1>
         <input type="text" placeholder="Search.." onChange={(e) => {
-          setSearchedMovie(e.target.value);
+          setQuery(e.target.value);
         }} 
 
           onKeyUp={(e) => {
-          console.log(e.code === "Enter")
-          // if(e.KeyboardEvent.code === 13)
+          if(e.code === "Enter") {
+            // make a call searching for that movie
+            searchMovie();
+          }
         }} />
         <SignButton onClick={() => {
             history.push('/log')
