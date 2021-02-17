@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom";
+import { useState } from 'react';
 
 const TopMenu = styled.nav`
   background: #000;
@@ -20,10 +21,18 @@ const SignButton = styled.button`
 
 const Menu = () => {
     const history = useHistory();
+    const [searchedMovie, setSearchedMovie] = useState(null)
     return (
         <TopMenu>
         <h1>Watch List</h1>
-        <input type="text" placeholder="Search.." />
+        <input type="text" placeholder="Search.." onChange={(e) => {
+          setSearchedMovie(e.target.value);
+        }} 
+
+          onKeyUp={(e) => {
+          console.log(e.code === "Enter")
+          // if(e.KeyboardEvent.code === 13)
+        }} />
         <SignButton onClick={() => {
             history.push('/log')
         }}
