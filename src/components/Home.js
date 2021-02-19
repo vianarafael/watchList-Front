@@ -33,10 +33,7 @@ const Home = () => {
         }
         getMovies()
     }, []);
-  
-  
-        console.log('isSearched', context.state)
- 
+   
     return ( 
         <PageDefault>
 
@@ -44,7 +41,9 @@ const Home = () => {
 
         <>
 
-        {context.state.searched ? (<div>A Bunch of movies</div>) : ''}
+        {context.state.searched ? ( <Carrousel  color={"#FFA500"}
+            title="Search"
+            films={context.state.searchedMovies} /> ) : ''}
        
         <Carrousel  color={"#00c86f"}
             title="Popular"
