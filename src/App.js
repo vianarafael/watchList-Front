@@ -9,7 +9,7 @@ import { useReducer, createContext } from 'react';
 export const SelectedMovieContext = createContext();
 
 
-const initialState = {selectedMovie: null, searched: false}
+const initialState = {selectedMovie: null, searched: false, searchedMovies: []}
 const reducer = (state, action) => {
   switch(action.type) {
     case 'set_selected_movie':
@@ -17,6 +17,8 @@ const reducer = (state, action) => {
       return state;
     case 'set_searched':
       state.searched  = true;
+    case 'set_searched_movies':
+      state.searchedMovies = action.payload;
     default:
       return state;
   }

@@ -35,7 +35,7 @@ const Home = () => {
     }, []);
   
   
-        console.log('isSearched', context.state.searched)
+        console.log('isSearched', context.state)
  
     return ( 
         <PageDefault>

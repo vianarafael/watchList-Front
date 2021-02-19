@@ -28,8 +28,6 @@ const Menu = () => {
     const [query, setQuery] = useState(null);
 
     const selectedContext = useContext(SelectedMovieContext);
-    console.log('state',selectedContext.state.searched)
-
 
     const searchMovie = async () => {
       const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${env.KEY}&language=en-US&query=${query}`);
@@ -39,9 +37,8 @@ const Menu = () => {
 
       // 2. if searched is true, display the searched movies on top
 
-
-
       selectedContext.dispatch({type: 'set_searched', payload: true });
+      selectedContext.dispatch({type: 'set_searched_movies' , payload: response.data.results})
 
       history.push('/');
     }
