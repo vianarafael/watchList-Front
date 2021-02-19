@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import env from 'react-dotenv';
 import Carrousel from './Carrousel'
@@ -7,6 +7,8 @@ import PageDefault from './PageDefault'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
+import { SelectedMovieContext } from '../App';
+
 
 const Home = () => {
     const [upcoming, setUpcoming] = useState([]);
@@ -14,19 +16,7 @@ const Home = () => {
     const [topRated, setTopRated] = useState([]);
     const [popular, setPopular] = useState([]);
 
-    const initialState = {selectedMovie: null};
-
-    const reducer = (state, action) => {
-        switch(action.type) {
-            case "set_selected_movie":
-                return {selectedMovie: action.payload};
-            default:
-                throw new Error();
-        }
-    }
-
-    const [state, dispatch] = useReducer(reducer, initialState);
-
+    const context = useContext(SelectedMovieContext);
     useEffect(() => {
         const getMovies = async() => {
             const getUpcoming = await axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${env.KEY}&language=en-US&page=1`);
@@ -42,12 +32,19 @@ const Home = () => {
             setPopular(getPopular.data.results);
         }
         getMovies()
-    }, [])
+    }, []);
+  
+  
+        console.log('isSearched', context.state.searched)
+ 
     return ( 
         <PageDefault>
+
         {popular && topRated && nowPlaying && upcoming ? (
 
         <>
+
+        {context.state.searched ? (<div>A Bunch of movies</div>) : ''}
        
         <Carrousel  color={"#00c86f"}
             title="Popular"

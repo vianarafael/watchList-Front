@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import env from 'react-dotenv';
+
+import { SelectedMovieContext } from '../App'
 
 const TopMenu = styled.nav`
   background: #000;
@@ -23,13 +25,27 @@ const SignButton = styled.button`
 
 const Menu = () => {
     const history = useHistory();
-    const [query, setQuery] = useState(null)
+    const [query, setQuery] = useState(null);
+
+    const selectedContext = useContext(SelectedMovieContext);
+    console.log('state',selectedContext.state.searched)
+
 
     const searchMovie = async () => {
       const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${env.KEY}&language=en-US&query=${query}`);
       // I need to make this display in the home if when the function is called
-      console.log(response.data.results);
+
+      // 1. set 2 states - searched & the array of searched movies - that goes to home
+
+      // 2. if searched is true, display the searched movies on top
+
+
+
+      selectedContext.dispatch({type: 'set_searched', payload: true });
+
+      history.push('/');
     }
+
     return (
         <TopMenu>
         <h1>Watch List</h1>

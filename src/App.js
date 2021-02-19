@@ -9,12 +9,14 @@ import { useReducer, createContext } from 'react';
 export const SelectedMovieContext = createContext();
 
 
-const initialState = {selectedMovie: null}
+const initialState = {selectedMovie: null, searched: false}
 const reducer = (state, action) => {
   switch(action.type) {
     case 'set_selected_movie':
       state.selectedMovie = action.payload;
       return state;
+    case 'set_searched':
+      state.searched  = true;
     default:
       return state;
   }
