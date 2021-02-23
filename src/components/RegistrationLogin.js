@@ -5,9 +5,6 @@ import styled from 'styled-components';
 
 import { useHistory } from 'react-router-dom';
 
-
-
-  
 const Registration = styled.div`
     
 text-align: center;
