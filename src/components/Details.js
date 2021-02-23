@@ -3,7 +3,8 @@ import { SelectedMovieContext } from '../App';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import env from 'react-dotenv';
-import BannerMain from './BannerMain'
+import BannerMain from './BannerMain';
+import PageDefault from './PageDefault'
 
 const Details = () => {
     const [filmData, setFilmData] = useState(null)
@@ -29,7 +30,7 @@ const Details = () => {
         console.log(response.data);
     }
     return (
-        <>
+        <PageDefault>
             { id ? ( <>
             {filmData ? (<>
                     <BannerMain
@@ -40,7 +41,7 @@ const Details = () => {
                     <button onClick={addToWatchList}>Add to WatchList</button>
                 </>) : 'loading'}
             </>) : history.push('/')}
-        </>
+        </PageDefault>
     )
 }
 

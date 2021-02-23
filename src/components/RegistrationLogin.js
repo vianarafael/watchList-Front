@@ -1,8 +1,8 @@
 
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
+import PageDefault from './PageDefault';
 import { useHistory } from 'react-router-dom';
 
 const Registration = styled.div`
@@ -70,36 +70,36 @@ function RegistrationLogin() {
 
   const history = useHistory();
   return (
-    <>
-    {localStorage.token ? history.push("/dashboard"): (
-      <div className="RegistrationLogin">
-      <Registration>
-        <h1>Registration</h1>
-        <label>Username</label>
-        <input type="text" onChange={e => {
-          setUsernameReg(e.target.value);
-        }} />
-        <label>Password</label>
-        <input type="text" onChange={e => {
-          setPasswordReg(e.target.value);
-        }} />
-        <button onClick={register}>Register</button>
-      </Registration>
-      <Registration>
-        <h1>Login</h1>
-        <input type="text" placeholder="Username..." onChange={e => {
-          setUsername(e.target.value);
-        }} />
-        <input type="password" placeholder="Password .." onChange={e => {
-          setPassword(e.target.value);
-        }} />
-        <button onClick={login}>Login</button>
-      </Registration>
-    </div>
-    )
-  
-  }
-  </>
+    <PageDefault>
+      {localStorage.token ? history.push("/dashboard"): (
+        <div className="RegistrationLogin">
+        <Registration>
+          <h1>Registration</h1>
+          <label>Username</label>
+          <input type="text" onChange={e => {
+            setUsernameReg(e.target.value);
+          }} />
+          <label>Password</label>
+          <input type="text" onChange={e => {
+            setPasswordReg(e.target.value);
+          }} />
+          <button onClick={register}>Register</button>
+        </Registration>
+        <Registration>
+          <h1>Login</h1>
+          <input type="text" placeholder="Username..." onChange={e => {
+            setUsername(e.target.value);
+          }} />
+          <input type="password" placeholder="Password .." onChange={e => {
+            setPassword(e.target.value);
+          }} />
+          <button onClick={login}>Login</button>
+        </Registration>
+      </div>
+      )
+    
+    }
+  </PageDefault>
   );
 }
 
