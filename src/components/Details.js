@@ -3,6 +3,7 @@ import { SelectedMovieContext } from '../App';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import env from 'react-dotenv';
+import BannerMain from './BannerMain'
 
 const Details = () => {
     const [filmData, setFilmData] = useState(null)
@@ -10,13 +11,14 @@ const Details = () => {
     const selectedContext = useContext(SelectedMovieContext)
     const id = selectedContext.state.selectedMovie;
     useEffect(() => {
+    
          const  getMovieData = async () => {
             const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${env.KEY}&append_to_response=videos,credits`)
             setFilmData(response.data);
         }
         getMovieData();
 
-    })
+    }, [])
     const addToWatchList = async () => {
         console.log('da token', localStorage.token)
         const response = await axios.post(`/addMovie/${id}`, null,  { params: {
@@ -30,7 +32,11 @@ const Details = () => {
         <>
             { id ? ( <>
             {filmData ? (<>
-                    <p>{filmData.title}</p>
+                    <BannerMain
+              videoTitle={filmData.title}
+              url={filmData.videos.results[0]['key']}
+              videoDescription={filmData.overview}
+            />
                     <button onClick={addToWatchList}>Add to WatchList</button>
                 </>) : 'loading'}
             </>) : history.push('/')}
