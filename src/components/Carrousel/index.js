@@ -1,32 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { VideoCardGroupContainer, Title } from './styles';
 import VideoCard from './components/VideoCard';
-
 import Slider, { SliderItem } from './components/Slider';
+
+import axios from 'axios';
 
 function Carousel({ color, title, films, fromDashboard }) {
   const categoryTitle = title;
   const categoryColor = color;
-  const [genres, setGenres] = useState([]);
-  // hacky - removing the film that has no videos
-  if (films) {
-    films = films.filter((film) => film.id !== 19404);
-  }
+  // const [genres, setGenres] = useState([]);
+  // // hacky - removing the film that has no videos
+  // if (films) {
+  //   films = films.filter((film) => film.id !== 19404);
+  // }
 
-  useEffect(() => {
-    fetch(
-      'https://api.themoviedb.org/3/genre/movie/list?api_key=e576111d75dee905a12167d6f1387f71&language=en-US'
-    )
-      .then((res) => res.json())
-      .then((res) => setGenres(res.genres));
-  }, [setGenres]);
+  // useEffect(() => {
+  //   fetch(
+  //     'https://api.themoviedb.org/3/genre/movie/list?api_key=e576111d75dee905a12167d6f1387f71&language=en-US'
+  //   )
+  //     .then((res) => res.json())
+  //     .then((res) => setGenres(res.genres));
+  // }, [setGenres]);
 
-  const genreConverter = {};
-  if (genres) {
-    genres.forEach((genre) => {
-      genreConverter[genre.id] = genre.name;
-    });
-  }
+  // const genreConverter = {};
+  // if (genres) {
+  //   genres.forEach((genre) => {
+  //     genreConverter[genre.id] = genre.name;
+  //   });
+  // }
 
   return (
     <VideoCardGroupContainer>
@@ -49,9 +50,12 @@ function Carousel({ color, title, films, fromDashboard }) {
                   poster={film.poster_path}
                   categoryColor={categoryColor}
                 />
-                {fromDashboard ? <i onClick={() => {
+                {fromDashboard ? <i onClick={ async () => {
                   // remove this film from the database
-                  console.log(film.id)
+                    axios.delete(`/removeMovie/${film.id}`, { data: { uid: localStorage.uid } });
+
+                    // horrible solution - refactor that later
+                    window.location.reload(false);
                 }} className="fas fa-trash-alt"></i> : ''}
               </SliderItem>
             ))
