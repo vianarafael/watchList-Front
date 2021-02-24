@@ -4,7 +4,7 @@ import VideoCard from './components/VideoCard';
 
 import Slider, { SliderItem } from './components/Slider';
 
-function Carousel({ color, title, films }) {
+function Carousel({ color, title, films, fromDashboard }) {
   const categoryTitle = title;
   const categoryColor = color;
   const [genres, setGenres] = useState([]);
@@ -49,6 +49,10 @@ function Carousel({ color, title, films }) {
                   poster={film.poster_path}
                   categoryColor={categoryColor}
                 />
+                {fromDashboard ? <i onClick={() => {
+                  // remove this film from the database
+                  console.log(film.id)
+                }} className="fas fa-trash-alt"></i> : ''}
               </SliderItem>
             ))
           : ''}

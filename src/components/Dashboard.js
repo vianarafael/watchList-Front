@@ -37,12 +37,16 @@ const Dashboard = ({name}) => {
     },[])
 
     const displayMovies = () => {
-      const theWatchList = watchList.map(film => film.data)
-        return <Carrousel  color={"#FFA500"}
-            title="Watch List"
-            films={theWatchList}
-            noRepeat={true}
-            />
+      const watchListMovies = watchList.map(film => film.data)
+      console.log(watchListMovies)
+        return (
+                  <Carrousel  color={"#FFA500"}
+                    title="Watch List"
+                    films={watchListMovies}
+                    noRepeat={true}
+                    fromDashboard={true}
+                    />
+                )
     }
     return ( 
     <PageDefault>
