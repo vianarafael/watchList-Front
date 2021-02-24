@@ -24,7 +24,6 @@ function RegistrationLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const [loginStatus, setLoginStatus] = useState(false);
 
   const register = async () => {
     const postRequest = await axios.post('/register' ,{
@@ -37,9 +36,9 @@ function RegistrationLogin() {
   const login = async () => {
     const response = await axios.post('/login', {username, password});
     if (response.data.auth === false) {
-      setLoginStatus(false);
+      localStorage.setItem("logged", false);
     } else {
-      setLoginStatus(true);
+      localStorage.setItem("logged", true);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("uid", response.data.data.id);
       userAuthenticated();

@@ -3,10 +3,13 @@ import axios from "axios";
 import env from 'react-dotenv'
 import Carrousel from './Carrousel/index'
 import PageDefault from "./PageDefault";
+import { useHistory } from "react-router-dom";
 
 const Dashboard = ({name}) => {
+  const history = useHistory();
   const [watchList, setWatchList] = useState([]);
     useEffect(() => {
+      console.log(localStorage)
       async function getUserData() {
           const uid = localStorage.getItem("uid")
           const getMovies = await axios.get(`/movies/${uid}`,  {
@@ -15,7 +18,12 @@ const Dashboard = ({name}) => {
             }
           });
           let moviesData;
-          console.log(getMovies.data)
+          if (getMovies.data.message === "Authentication failed") {
+            localStorage.removeItem("token");
+            localStorage.removeItem("uid");
+            localStorage.removeItem("logged");
+            history.push('/log');
+          }
           if (getMovies.data.auth !== false) {
            moviesData = await Promise.all(getMovies.data.rows.map((film) => axios.get(`https://api.themoviedb.org/3/movie/${film.mid}?api_key=${env.KEY}&append_to_response=videos,credits`)
             )
@@ -36,13 +44,13 @@ const Dashboard = ({name}) => {
             noRepeat={true}
             />
     }
-    console.log(localStorage)
     return ( 
     <PageDefault>
       <h1>Dashboard</h1>
       <button onClick={() => {
         localStorage.removeItem("token");
         localStorage.removeItem("uid");
+        localStorage.removeItem("logged");
       }
     }>Clear Local Storage</button>
       <>

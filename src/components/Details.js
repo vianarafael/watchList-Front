@@ -21,7 +21,6 @@ const Details = () => {
 
     }, [])
     const addToWatchList = async () => {
-        console.log('da token', localStorage.token)
         const response = await axios.post(`/addMovie/${id}`, null,  { params: {
             token: localStorage.token
             }

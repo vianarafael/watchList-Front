@@ -59,7 +59,7 @@ const Menu = () => {
         <SignButton onClick={() => {
             history.push('/log')
         }}
-        >Sign In</SignButton>
+        >{ localStorage.getItem("logged") ? "Sing Out" : "Sign In"}</SignButton>
     </TopMenu>
     )
 }
