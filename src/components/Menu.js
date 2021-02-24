@@ -23,6 +23,10 @@ const SignButton = styled.button`
   &:focus { outline:none };
 `
 
+const Logo = styled.img`
+  cursor: pointer;
+`
+
 const Menu = () => {
     const history = useHistory();
     const [query, setQuery] = useState(null);
@@ -45,7 +49,9 @@ const Menu = () => {
 
     return (
         <TopMenu>
-        <h1>Watch List</h1>
+        <Logo onClick={() => {
+          history.push('/');
+        }} src="https://fontmeme.com/permalink/210224/4b588a1a31011f69495c99671fd7706e.png" alt="netflix-font" border="0" />
         <input type="text" placeholder="Search.." onChange={(e) => {
           setQuery(e.target.value);
         }} 
