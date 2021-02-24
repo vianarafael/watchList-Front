@@ -56,10 +56,20 @@ const Menu = () => {
             searchMovie();
           }
         }} />
-        <SignButton onClick={() => {
+        { !localStorage.getItem("logged") ?  
+        (<SignButton onClick={() => {
             history.push('/log')
         }}
-        >{ localStorage.getItem("logged") ? "Sing Out" : "Sign In"}</SignButton>
+        >Sign In</SignButton>)
+        : 
+        (<SignButton onClick={() => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("uid");
+          localStorage.removeItem("logged");
+          history.push('/');
+      }}
+      >Sign Out</SignButton>)
+      }
     </TopMenu>
     )
 }
