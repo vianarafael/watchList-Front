@@ -46,13 +46,6 @@ const Dashboard = ({name}) => {
     }
     return ( 
     <PageDefault>
-      <h1>Dashboard</h1>
-      <button onClick={() => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("uid");
-        localStorage.removeItem("logged");
-      }
-    }>Clear Local Storage</button>
       <>
        {watchList ? displayMovies() : 'loading'}
       </>

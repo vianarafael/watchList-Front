@@ -5,6 +5,7 @@ import axios from 'axios';
 import env from 'react-dotenv';
 
 import { SelectedMovieContext } from '../App'
+import Dashboard from './Dashboard';
 
 const TopMenu = styled.nav`
   background: #000;
@@ -24,6 +25,11 @@ const SignButton = styled.button`
 `
 
 const Logo = styled.img`
+  cursor: pointer;
+`
+
+const DashboardIcon = styled.i`
+  color: white;
   cursor: pointer;
 `
 
@@ -62,19 +68,26 @@ const Menu = () => {
             searchMovie();
           }
         }} />
+
         { !localStorage.getItem("logged") ?  
         (<SignButton onClick={() => {
             history.push('/log')
         }}
         >Sign In</SignButton>)
         : 
-        (<SignButton onClick={() => {
+        (
+          <>
+          <DashboardIcon onClick={() => {
+            history.push('/dashboard');
+          }} className="fas fa-tachometer-alt fa-2x"></DashboardIcon>
+        <SignButton onClick={() => {
           localStorage.removeItem("token");
           localStorage.removeItem("uid");
           localStorage.removeItem("logged");
           history.push('/');
       }}
-      >Sign Out</SignButton>)
+      >Sign Out</SignButton>
+      </>)
       }
     </TopMenu>
     )
