@@ -37,7 +37,7 @@ const Details = () => {
               url={filmData.videos.results[0]['key']}
               videoDescription={filmData.overview}
             />
-                    <button onClick={addToWatchList}>Add to WatchList</button>
+                   { localStorage.logged ? <button onClick={addToWatchList}>Add to WatchList</button> : <p>You must be logged to add a movie to your watch list</p> }
                 </>) : 'loading'}
             </>) : history.push('/')}
         </PageDefault>
